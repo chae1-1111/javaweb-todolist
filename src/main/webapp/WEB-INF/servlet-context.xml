@@ -6,7 +6,7 @@
 
     <mvc:annotation-driven></mvc:annotation-driven>
 
-    <mvc:resources mapping="/resources/**" location="/resources"></mvc:resources>
+    <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"></property>
@@ -19,6 +19,7 @@
         <property name="formatters">
             <set>
                 <bean class="org.zerock.todolist.controller.formatter.LocalDateFormatter"/>
+                <bean class="org.zerock.todolist.controller.formatter.CheckboxFormatter"/>
             </set>
         </property>
     </bean>

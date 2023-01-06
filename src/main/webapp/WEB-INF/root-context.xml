@@ -5,8 +5,6 @@
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <context:component-scan base-package="org.zerock.todolist"/>
-
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
 
@@ -32,6 +30,8 @@
         <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
     </bean>
 
-    <mybatis:scan base-package="org.zerock.springex.mapper"></mybatis:scan>
+    <mybatis:scan base-package="org.zerock.todolist.mapper"></mybatis:scan>
 
+    <context:component-scan base-package="org.zerock.todolist.config"/>
+    <context:component-scan base-package="org.zerock.todolist.service"/>
 </beans>
