@@ -56,7 +56,6 @@
                     </div>
                     <div class="card-body">
                         <form>
-
                         <div class="input-group mb-3">
                             <span class="input-group-text">TNO</span>
                             <input type="text" name="tno" class="form-control" value="<c:out value="${dto.tno}"></c:out>" readonly/>
@@ -95,7 +94,7 @@
                                 e.preventDefault();
                                 e.stopPropagation();
 
-                                formObj.action = "/todo/remove";
+                                formObj.action = "/todo/remove?${pageRequestDTO.link}";
                                 formObj.method = "post";
 
                                 formObj.submit();
@@ -113,7 +112,7 @@
                             },false);
 
                             document.querySelector("button.btn.btn-secondary").addEventListener("click", (e) => {
-                                self.location = "/todo/list";
+                                self.location = "/todo/list?${pageRequestDTO.link}";
                             },false);
                         </script>
                     </div>

@@ -52,7 +52,7 @@ public class TodoServiceImpl implements TodoService{
                 .map(vo -> modelMapper.map(vo, TodoDTO.class))
                 .collect(Collectors.toList());
 
-        int total = todoMapper.getCount();
+        int total = todoMapper.getCount(pageRequestDTO);
 
         PageResponseDTO<TodoDTO> pageResponseDTO = PageResponseDTO.<TodoDTO>withAll()
                 .dtoList(dtoList)
@@ -65,8 +65,8 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
-    public int getCount() {
-        return todoMapper.getCount();
+    public int getCount(PageRequestDTO pageRequestDTO) {
+        return todoMapper.getCount(pageRequestDTO);
     }
 
     @Override

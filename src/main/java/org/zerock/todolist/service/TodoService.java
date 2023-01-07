@@ -14,7 +14,7 @@ public interface TodoService {
 
     PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO);
 
-    int getCount();
+    int getCount(PageRequestDTO pageRequestDTO);
 
     TodoDTO getOne(Long tno);
 

@@ -16,7 +16,7 @@ public interface TodoMapper {
 
     List<TodoVO> selectList(PageRequestDTO pageRequestDTO);
 
-    int getCount();
+    int getCount(PageRequestDTO pageRequestDTO);
 
     TodoVO selectOne(Long tno);
 

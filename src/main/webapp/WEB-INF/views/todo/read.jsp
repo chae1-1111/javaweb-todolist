@@ -85,11 +85,11 @@
 
                         <script>
                             document.querySelector("button.btn.btn-primary").addEventListener("click", (e) => {
-                                self.location = "/todo/modify?tno=" + ${dto.tno};
+                                self.location = "/todo/modify?tno=${dto.tno}&${pageRequestDTO.link}";
                             },false);
 
                             document.querySelector("button.btn.btn-secondary").addEventListener("click", (e) => {
-                                self.location = "/todo/list";
+                                self.location = "/todo/list?${pageRequestDTO.link}";
                             },false);
                         </script>
                     </div>

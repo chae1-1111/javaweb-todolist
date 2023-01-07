@@ -51,6 +51,32 @@
         <div class="row content">
             <div class="col">
                 <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Search</h5>
+                        <form action="/todo/list" method="get">
+                            <input type="hidden" name="size" value="${pageRequestDTO.size}">
+                            <div class="mb-3">
+                                <input type="checkbox" name="finished" ${pageRequestDTO.finished ? "checked" : ""}>완료여부
+                            </div>
+                            <div class="mb-3">
+                                <input type="checkbox" name="types" value="t" ${pageRequestDTO.checkType('t') ? "checked" : ""}>제목
+                                <input type="checkbox" name="types" value="w" ${pageRequestDTO.checkType('w') ? "checked" : ""}>작성자
+                                <input type="text" name="keyword" class="form-control" value="${pageRequestDTO.keyword}">
+                            </div>
+                            <div class="input-group mb-3 dueDateDiv">
+                                <input type="date" name="from" class="form-control" value="${pageRequestDTO.from}">
+                                <input type="date" name="to" class="form-control" value="${pageRequestDTO.to}">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="float-end">
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                    <button type="reset" class="btn btn-info clearBtn">Clear</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
                     <div class="card-header">
                         Featured
                     </div>
@@ -70,9 +96,11 @@
                             <c:forEach items="${responseDTO.getDtoList()}" var="dto">
                                 <tr>
                                     <th scope="row"><c:out value="${dto.tno}"/> </th>
-                                    <td><a href="/todo/read?tno=${dto.tno}" class="link-dark">
-                                        <c:out value="${dto.title}"/>
-                                    </a></td>
+                                    <td>
+                                        <a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}" class="link-dark" data-tno="${dto.tno}">
+                                            <c:out value="${dto.title}"/>
+                                        </a>
+                                    </td>
                                     <td><c:out value="${dto.writer}"/></td>
                                     <td><c:out value="${dto.dueDate}"/></td>
                                     <td><c:out value="${dto.finished ? 'Done' : 'Not Yet'}"/></td>
@@ -100,22 +128,26 @@
                                     document.querySelector(".pagination").addEventListener("click", e => {
                                         e.preventDefault();
                                         e.stopPropagation();
-
                                         const target = e.target;
 
                                         if(target.tagName !== 'A') {
+
                                             return;
                                         }
-
                                         const num = target.getAttribute("data-num");
 
-                                        let link = `/todo/list?page=\${num}`;
+                                        const formObj = document.querySelector("form");
 
-                                        if(${responseDTO.size} != 10) {
-                                            link += '&size=' + ${responseDTO.size};
-                                        }
+                                        formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'/>`;
 
-                                        self.location = link;
+                                        formObj.submit();
+
+                                    }, false);
+
+                                    document.querySelector(".btn.btn-info.clearBtn").addEventListener("click", e => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        self.location = "/todo/list";
                                     }, false);
                                 </script>
                             </nav>
